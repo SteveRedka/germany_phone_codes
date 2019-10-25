@@ -1,0 +1,2 @@
+class PhoneCode < ApplicationRecord
+end

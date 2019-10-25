@@ -1,0 +1,17 @@
+{
+  "name": "germany_phone_codes",
+  "private": true,
+  "dependencies": {
+    "@babel/preset-react": "^7.6.3",
+    "@rails/webpacker": "^4.0.7",
+    "@reach/router": "^1.2.1",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "prop-types": "^15.7.2",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
+    "react_ujs": "^2.6.0"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3.9.0"
+  }
+}
