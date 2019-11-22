@@ -1,24 +1,16 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Requirements
+* ruby 2.4.1p111
+* Rails 5.2.3
+* Yarn 1.19.1
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Installation
+```bash
+git clone git@github.com:SteveRedka/germany_phone_codes.git
+cd germany_phone_codes
+bundle
+rake db:create
+rake db:migrate
+rake db:seed
+```
