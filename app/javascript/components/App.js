@@ -1,11 +1,11 @@
 import React from "react";
 import { Router } from "@reach/router";
-import phoneCodeList from "./phoneCodeList";
+import PhoneCodeList from "./PhoneCodeList";
 
 function App() {
   return (
     <Router>
-      <phoneCodeList path="/" />
+      <PhoneCodeList path="/" />
     </Router>
   );
 }

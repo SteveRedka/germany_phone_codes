@@ -58,3 +58,6 @@ gem 'webpacker', '~> 4.x'
 gem 'foreman'
 gem 'jsonapi-resources'
 gem 'react-rails'
+gem "therubyracer"
+gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
+gem "twitter-bootstrap-rails"
