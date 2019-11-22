@@ -17,12 +17,32 @@ class PhoneCodeList extends React.Component {
   }
 
   render() {
+    console.log(this.state.phone_codes)
     const listItems = this.state.phone_codes.map(code =>
-      <li key={code.id}>{code.attributes.prefix}</li>
+      <tr key={code.id}>
+        <td>{code.attributes.prefix}</td>
+        <td>{code.attributes["min-len"]}</td>
+        <td>{code.attributes["max-len"]}</td>
+        <td>{code.attributes.usage}</td>
+        <td>{code.attributes.comment}</td>
+      </tr>
     );
 
     return(
-      <ul>{listItems}</ul>
+      <table className="table">
+        <thead>
+          <tr>
+            <th scope="col">Prefix</th>
+            <th scope="col">min_len</th>
+            <th scope="col">max_len</th>
+            <th scope="col">usage</th>
+            <th scope="col">comment</th>
+          </tr>
+        </thead>
+        <tbody>
+          {listItems}
+        </tbody>
+      </table>
     )
   }
 }
