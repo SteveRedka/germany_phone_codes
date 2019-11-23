@@ -7,17 +7,13 @@ class PhoneCodeList extends React.Component {
   }
 
   async loadCodes() {
-    const response = await fetch("/api/phone-codes");
+    var phoneCodeField = document.getElementById('phone-code-search-input')
+    const response = await fetch(`/api/phone-codes?filter[search]=${phoneCodeField.value}`);
     const data = await response.json();
     this.setState({phone_codes: data.data})
   }
 
-  componentDidMount() {
-    this.loadCodes();
-  }
-
   render() {
-    console.log(this.state.phone_codes)
     const listItems = this.state.phone_codes.map(code =>
       <tr key={code.id}>
         <td>{code.attributes.prefix}</td>
@@ -28,21 +24,33 @@ class PhoneCodeList extends React.Component {
       </tr>
     );
 
+    const form =
+      <form onSubmit={this.loadCodes.bind(this)}>
+        <label>
+          Name:
+          <input type="text" id="phone-code-search-input" onChange={this.loadCodes.bind(this)} />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+
     return(
-      <table className="table">
-        <thead>
-          <tr>
-            <th scope="col">Prefix</th>
-            <th scope="col">min_len</th>
-            <th scope="col">max_len</th>
-            <th scope="col">usage</th>
-            <th scope="col">comment</th>
-          </tr>
-        </thead>
-        <tbody>
-          {listItems}
-        </tbody>
-      </table>
+      <div>
+        {form}
+        <table className="table">
+          <thead>
+            <tr>
+              <th scope="col">Prefix</th>
+              <th scope="col">min_len</th>
+              <th scope="col">max_len</th>
+              <th scope="col">usage</th>
+              <th scope="col">comment</th>
+            </tr>
+          </thead>
+          <tbody>
+            {listItems}
+          </tbody>
+        </table>
+      </div>
     )
   }
 }
