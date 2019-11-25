@@ -1,11 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe WordAndPrefixSearchQuery, type: :query do
+RSpec.describe PhoneCodes::SearchQuery, type: :query do
   let! :phone_code1 { create(:phone_code, prefix: 1, usage: 'Mostly used by fish people') }
   let! :dashed_code { create(:phone_code, prefix: 812, min_len: 6, max_len: 11, usage: 'Saint-Petersburg') }
-  let! :umlaut_code { create(:phone_code, prefix: 2296, min_len: 6, max_len: 11, usage: 'Reichshof-Brüchermühle') }
 
-  subject { WordAndPrefixSearchQuery }
+  subject { PhoneCodes::SearchQuery }
 
   describe 'text search' do
     it 'finds normal text' do
@@ -19,8 +18,6 @@ RSpec.describe WordAndPrefixSearchQuery, type: :query do
       expect(result).to be_empty
     end
 
-    it 'finds weird umlauted entries if you look them up with normal latin letters'
-
     it 'works with dashes normally' do
       result = subject.call('t-peter')
       expect(result.first).to eq(dashed_code)
@@ -29,10 +26,23 @@ RSpec.describe WordAndPrefixSearchQuery, type: :query do
     it 'works with empty query' do
       expect(subject.call('').length).to eq(PhoneCode.all.length)
     end
+
+    describe 'umlauts' do
+      it 'performs search according to accent transformation rules' do
+        denormalized = 'ä ö ü ß'
+        normalized = 'ae oe ue ss'
+        denormalized_code = create(:phone_code, prefix: 2296, min_len: 6, max_len: 11, comment: denormalized)
+        expect(subject.call(normalized).first).to eq(denormalized_code)
+      end
+
+      # I would also add unaccented search, but it isn't required, so I'm skipping it
+    end
   end
 
   describe 'prefix and text' do
-    it 'does OR search if you enter prefix and text'
+    it 'does OR search if you enter prefix and text' do
+      # subject.call()
+    end
   end
 
   describe 'prefix' do

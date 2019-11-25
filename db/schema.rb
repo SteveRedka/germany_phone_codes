@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_24_134412) do
+ActiveRecord::Schema.define(version: 2019_11_23_082637) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "unaccent"
 
   create_table "phone_codes", force: :cascade do |t|
     t.integer "prefix", null: false
