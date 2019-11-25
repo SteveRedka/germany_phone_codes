@@ -25,13 +25,19 @@ class PhoneCodeList extends React.Component {
     );
 
     const form =
-      <form onSubmit={this.loadCodes.bind(this)}>
-        <label>
-          Name:
-          <input type="text" id="phone-code-search-input" onChange={this.loadCodes.bind(this)} />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
+      <div className="breadcrumb">
+        <form onSubmit={this.loadCodes.bind(this)} className="form-group">
+          <div className="form-row align-items-center">
+            <div className="col-sm-8 col-sm-offset-1">
+              <input type="text" id="phone-code-search-input" onChange={this.loadCodes.bind(this)} className="form-control" placeholder="Enter search term or phone code" />
+            </div>
+            <div className="col-sm-1">
+              <input type="submit" value="Search" className="btn btn-primary" />
+            </div>
+          </div>
+        </form>
+        &nbsp;
+      </div>
 
     return(
       <div>
