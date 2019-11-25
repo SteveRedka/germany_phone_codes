@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe PhoneCodes::SearchQuery, type: :query do
-  let! :phone_code1 { create(:phone_code, prefix: 1, usage: 'Mostly used by fish people') }
+  let! :phone_code1 { create(:phone_code, prefix: 69, usage: 'Mostly used by fish people') }
   let! :dashed_code { create(:phone_code, prefix: 812, min_len: 6, max_len: 11, usage: 'Saint-Petersburg') }
 
   subject { PhoneCodes::SearchQuery }
@@ -24,18 +24,7 @@ RSpec.describe PhoneCodes::SearchQuery, type: :query do
     end
 
     it 'works with empty query' do
-      expect(subject.call('').length).to eq(PhoneCode.all.length)
-    end
-
-    describe 'umlauts' do
-      it 'performs search according to accent transformation rules' do
-        denormalized = 'ä ö ü ß'
-        normalized = 'ae oe ue ss'
-        denormalized_code = create(:phone_code, prefix: 2296, min_len: 6, max_len: 11, comment: denormalized)
-        expect(subject.call(normalized).first).to eq(denormalized_code)
-      end
-
-      # I would also add unaccented search, but it isn't required, so I'm skipping it
+      expect(subject.call.length).to eq(PhoneCode.all.length)
     end
   end
 
@@ -43,17 +32,5 @@ RSpec.describe PhoneCodes::SearchQuery, type: :query do
     it 'does OR search if you enter prefix and text' do
       # subject.call()
     end
-  end
-
-  describe 'prefix' do
-    it 'searches exact prefixes'
-
-    describe 'prefix splitting' do
-      it 'tries to split entered number to find an exact prefix'
-    end
-
-    it 'works with dashed numbers normally'
-
-    it 'works with whitespaced numbers normally'
   end
 end
