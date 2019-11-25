@@ -14,7 +14,7 @@ module PhoneCodes
     end
 
     def self.list_possible_prefixes(str)
-      str.to_s.split(' ')
+      phones = str.to_s.split(' ')
               .map { |s| s.scan(VALID_PHONE_REGEX)  }
               .flatten
               .map { |code| self.cleanup_phone_code(code) }

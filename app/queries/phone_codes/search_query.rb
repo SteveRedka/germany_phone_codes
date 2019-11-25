@@ -4,7 +4,10 @@
 
 module PhoneCodes
   class SearchQuery
-    def self.call(str = '')
+    def self.call(str)
+      str ||= ''
+      return PhoneCode.all if str.empty?
+
       terms = str.downcase.split(' ').join("|")
       CommentsQuery.call(str).or(PrefixesQuery.call(str).or(UsagesQuery.call(str)))
     end

@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe PhoneCodes::CommentsQuery, type: :query do
   denormalized = 'ä ö ü ß'
   normalized = 'ae oe ue ss'
-  let! :code_with_umlauts { create(:phone_code, usage: denormalized) }
+  let! :code_with_umlauts { create(:phone_code, comment: denormalized) }
 
   subject { PhoneCodes::CommentsQuery }
 

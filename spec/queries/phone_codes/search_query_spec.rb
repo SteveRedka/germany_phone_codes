@@ -24,7 +24,7 @@ RSpec.describe PhoneCodes::SearchQuery, type: :query do
     end
 
     it 'works with empty query' do
-      expect(subject.call.length).to eq(PhoneCode.all.length)
+      expect(subject.call('').length).to eq(PhoneCode.all.length)
     end
   end
 

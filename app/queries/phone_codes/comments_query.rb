@@ -6,9 +6,9 @@ module PhoneCodes
     def self.call(str)
       terms = str.downcase.split(' ').join("|")
       PhoneCode.where("""
-        LOWER(usage) ~ ? OR
-        LOWER(#{self.normalize_umlauts('usage')}) ~ ? OR
-        LOWER(UNACCENT(usage)) ~ ?
+        LOWER(comment) ~ ? OR
+        LOWER(#{self.normalize_umlauts('comment')}) ~ ? OR
+        LOWER(UNACCENT(comment)) ~ ?
       """, terms, terms, terms)
     end
 
