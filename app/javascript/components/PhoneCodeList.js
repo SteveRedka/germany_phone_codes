@@ -6,7 +6,8 @@ class PhoneCodeList extends React.Component {
     this.state = {phone_codes: []};
   }
 
-  async loadCodes() {
+  async loadCodes(e) {
+    e.preventDefault();
     var phoneCodeField = document.getElementById('phone-code-search-input')
     const response = await fetch(`/api/phone-codes?filter[search]=${phoneCodeField.value}`);
     const data = await response.json();
@@ -32,7 +33,7 @@ class PhoneCodeList extends React.Component {
               <input type="text" id="phone-code-search-input" onChange={this.loadCodes.bind(this)} className="form-control" placeholder="Enter search term or phone code" />
             </div>
             <div className="col-sm-1">
-              <input type="submit" value="Search" className="btn btn-primary" />
+              <input type="submit" value="Search" className="btn btn-primary" onClick={this.loadCodes.bind(this)} />
             </div>
           </div>
         </form>
