@@ -1,4 +1,4 @@
-class Api::PhoneCodeResource < JSONAPI::Resource
+class Api::V1::PhoneCodeResource < JSONAPI::Resource
   attributes :prefix, :min_len, :max_len, :usage, :comment, :id
 
   filter :search, apply: ->(records, value, _options) {
