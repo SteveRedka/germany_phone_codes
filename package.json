@@ -31,8 +31,7 @@
     ],
     "moduleDirectories": [
       "node_modules",
-      "app/javascript/packs"
-    ],
-    "setupTestFrameworkScriptFile": "./node_modules/jest-enzyme/lib/index.js"
+      "app/javascript"
+    ]
   }
 }
