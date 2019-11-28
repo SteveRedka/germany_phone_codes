@@ -7,16 +7,20 @@ class PhoneCodeList extends React.Component {
   }
 
   async loadCodes(e) {
-    e.preventDefault();
+    if(e) { e.preventDefault() };
     var phoneCodeField = document.getElementById('phone-code-search-input')
     const response = await fetch(`/api/v1/phone-codes?filter[search]=${phoneCodeField.value}`);
     const data = await response.json();
     this.setState({phone_codes: data.data})
   }
 
+  componentDidMount() {
+    this.loadCodes()
+  }
+
   render() {
     const listItems = this.state.phone_codes.map(code =>
-      <tr key={code.id}>
+      <tr key={code.id} className="phone-code-row">
         <td>{code.attributes.prefix}</td>
         <td>{code.attributes["min-len"]}</td>
         <td>{code.attributes["max-len"]}</td>
@@ -43,7 +47,7 @@ class PhoneCodeList extends React.Component {
     return(
       <div>
         {form}
-        <table className="table">
+        <table className="table phone-code-table">
           <thead>
             <tr>
               <th scope="col">Prefix</th>
