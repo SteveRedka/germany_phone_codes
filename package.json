@@ -6,6 +6,8 @@
     "@rails/webpacker": "^4.0.7",
     "@reach/router": "^1.2.1",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "enzyme": "^3.10.0",
+    "jest-enzyme": "^7.1.2",
     "prop-types": "^15.7.2",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
@@ -13,6 +15,24 @@
     "yarn": "^1.19.1"
   },
   "devDependencies": {
+    "babel-jest": "^24.9.0",
+    "jest": "^24.9.0",
+    "react-test-renderer": "^16.12.0",
+    "regenerator-runtime": "^0.13.3",
     "webpack-dev-server": "^3.9.0"
+  },
+  "scripts": {
+    "test": "jest",
+    "test-watch": "jest --watch"
+  },
+  "jest": {
+    "roots": [
+      "test/javascript"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "app/javascript/packs"
+    ],
+    "setupTestFrameworkScriptFile": "./node_modules/jest-enzyme/lib/index.js"
   }
 }
