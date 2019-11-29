@@ -6,8 +6,12 @@ class PhoneCodeList extends React.Component {
     this.state = {phone_codes: []};
   }
 
+  componentDidMount() {
+    this.loadCodes()
+  }
+
   async loadCodes(e) {
-    e.preventDefault();
+    if(e) { e.preventDefault() };
     var phoneCodeField = document.getElementById('phone-code-search-input')
     const response = await fetch(`/api/v1/phone-codes?filter[search]=${phoneCodeField.value}`);
     const data = await response.json();
