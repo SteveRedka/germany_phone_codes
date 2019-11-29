@@ -18,6 +18,7 @@
   "devDependencies": {
     "babel-jest": "^24.9.0",
     "jest": "^24.9.0",
+    "jest-fetch-mock": "^2.1.2",
     "react-test-renderer": "^16.12.0",
     "regenerator-runtime": "^0.13.3",
     "webpack-dev-server": "^3.9.0"
@@ -33,6 +34,10 @@
     "moduleDirectories": [
       "node_modules",
       "app/javascript"
+    ],
+    "automock": false,
+    "setupFiles": [
+      "./setupJest.js"
     ]
   }
 }

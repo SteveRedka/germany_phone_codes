@@ -8,13 +8,21 @@ class PhoneCodeList extends React.Component {
 
   async loadCodes(e) {
     if(e) { e.preventDefault() };
-    var phoneCodeField = document.getElementById('phone-code-search-input')
-    const response = await fetch(`/api/v1/phone-codes?filter[search]=${phoneCodeField.value}`);
-    const data = await response.json();
-    this.setState({phone_codes: data.data})
+    // var phoneCodeField = document.getElementById('phone-code-search-input')
+    var phoneCodeField = ''
+    console.log('1')
+    try {
+      const response = await fetch(`/api/v1/phone-codes?filter[search]=${phoneCodeField.value}`);
+      // const data = await response.json();
+      // this.setState({phone_codes: data.data})
+      console.log(response)
+    }
+    catch(e) {
+      console.log(e)
+    }
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.loadCodes()
   }
 
