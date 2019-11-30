@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Pagination } from 'semantic-ui-react'
+import { Pagination, Icon } from 'semantic-ui-react'
 
 class PhoneCodeList extends React.Component {
   constructor(props) {
     super(props);
     this.state = { phone_codes: [],
+                   links: [],
                    windowParams: new URLSearchParams(window.location.search) };
   }
 
@@ -17,7 +18,7 @@ class PhoneCodeList extends React.Component {
     if (this.state.windowParams != prevState.windowParams) {
       const response = await fetch(`/api/v1/phone-codes?${this.state.windowParams.toString()}`);
       const responseJson = await response.json();
-      this.setState({phone_codes: responseJson.data})
+      this.setState({phone_codes: responseJson.data, links: responseJson.links})
     }
   }
 
@@ -25,6 +26,22 @@ class PhoneCodeList extends React.Component {
     var searchParams = new URLSearchParams(this.state.windowParams.toString())
     searchParams.set('filter[search]', e.target.value)
     this.setState({ windowParams: searchParams })
+  }
+
+  async handlePaginationChange (_e, { activePage }) {
+    var searchParams = new URLSearchParams(this.state.windowParams.toString())
+    searchParams.set('page[number]', activePage)
+    this.setState({ windowParams: searchParams })
+  }
+
+  totalPages () {
+    var lastLink = this.state.links['last']
+    if (lastLink) {
+      var param = lastLink.match(/page%5Bnumber%5D=\d*/)[0].replace(/page%5Bnumber%5D=/, '') || 1
+      return parseInt(param)
+    } else {
+      return(1)
+    }
   }
 
   render() {
@@ -67,6 +84,15 @@ class PhoneCodeList extends React.Component {
             {listItems}
           </tbody>
         </table>
+        <Pagination
+          onPageChange={this.handlePaginationChange.bind(this)}
+          defaultActivePage={1}
+          firstItem={{ content: <Icon name='angle double left' />, icon: true }}
+          lastItem={{ content: <Icon name='angle double right' />, icon: true }}
+          prevItem={{ content: <Icon name='angle left' />, icon: true }}
+          nextItem={{ content: <Icon name='angle right' />, icon: true }}
+          totalPages={ this.totalPages() }
+        />
       </div>
     )
   }

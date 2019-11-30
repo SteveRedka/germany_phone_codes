@@ -10,6 +10,7 @@
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react_ujs": "^2.6.0",
+    "semantic-ui-react": "^0.88.1",
     "yarn": "^1.19.1"
   },
   "devDependencies": {
