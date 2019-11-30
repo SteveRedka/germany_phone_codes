@@ -84,15 +84,17 @@ class PhoneCodeList extends React.Component {
             {listItems}
           </tbody>
         </table>
-        <Pagination
-          onPageChange={this.handlePaginationChange.bind(this)}
-          defaultActivePage={1}
-          firstItem={{ content: <Icon name='angle double left' />, icon: true }}
-          lastItem={{ content: <Icon name='angle double right' />, icon: true }}
-          prevItem={{ content: <Icon name='angle left' />, icon: true }}
-          nextItem={{ content: <Icon name='angle right' />, icon: true }}
-          totalPages={ this.totalPages() }
-        />
+        <div className="text-center">
+          <Pagination
+            onPageChange={this.handlePaginationChange.bind(this)}
+            defaultActivePage={1}
+            firstItem={{ content: <Icon name='angle double left' />, icon: true }}
+            lastItem={{ content: <Icon name='angle double right' />, icon: true }}
+            prevItem={{ content: <Icon name='angle left' />, icon: true }}
+            nextItem={{ content: <Icon name='angle right' />, icon: true }}
+            totalPages={ this.totalPages() }
+          />
+        </div>
       </div>
     )
   }
