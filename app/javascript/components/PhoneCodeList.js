@@ -1,21 +1,30 @@
 import React, { useEffect, useState } from "react";
+import { Pagination } from 'semantic-ui-react'
 
 class PhoneCodeList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {phone_codes: []};
+    this.state = { phone_codes: [],
+                   windowParams: new URLSearchParams(window.location.search) };
   }
 
   componentDidMount() {
-    this.loadCodes()
+    var searchParams = new URLSearchParams(this.state.windowParams.toString())
+    this.setState({ windowParams: searchParams })
   }
 
-  async loadCodes(e) {
-    if(e) { e.preventDefault() };
-    var phoneCodeField = document.getElementById('phone-code-search-input')
-    const response = await fetch(`/api/v1/phone-codes?filter[search]=${phoneCodeField.value}`);
-    const data = await response.json();
-    this.setState({phone_codes: data.data})
+  async componentDidUpdate(prevProps, prevState) {
+    if (this.state.windowParams != prevState.windowParams) {
+      const response = await fetch(`/api/v1/phone-codes?${this.state.windowParams.toString()}`);
+      const responseJson = await response.json();
+      this.setState({phone_codes: responseJson.data})
+    }
+  }
+
+  async handleSearch(e) {
+    var searchParams = new URLSearchParams(this.state.windowParams.toString())
+    searchParams.set('filter[search]', e.target.value)
+    this.setState({ windowParams: searchParams })
   }
 
   render() {
@@ -31,13 +40,10 @@ class PhoneCodeList extends React.Component {
 
     const form =
       <div className="breadcrumb">
-        <form onSubmit={this.loadCodes.bind(this)} className="form-group">
+        <form className="form-group">
           <div className="form-row align-items-center">
-            <div className="col-sm-8 col-sm-offset-1">
-              <input type="text" id="phone-code-search-input" onChange={this.loadCodes.bind(this)} className="form-control" placeholder="Enter search term or phone code" />
-            </div>
-            <div className="col-sm-1">
-              <input type="submit" value="Search" className="btn btn-primary" onClick={this.loadCodes.bind(this)} />
+            <div className="col-sm-8 col-sm-offset-2">
+              <input type="text" id="phone-code-search-input" value={this.state.windowParams.get('filter[search]') || '' } onChange={this.handleSearch.bind(this)} className="form-control" placeholder="Enter search term or phone code" />
             </div>
           </div>
         </form>
