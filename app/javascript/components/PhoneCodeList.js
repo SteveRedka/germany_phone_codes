@@ -86,12 +86,13 @@ class PhoneCodeList extends React.Component {
         </table>
         <div className="text-center">
           <Pagination
+            id='phone-codes-pagination'
             onPageChange={this.handlePaginationChange.bind(this)}
             defaultActivePage={1}
-            firstItem={{ content: <Icon name='angle double left' />, icon: true }}
-            lastItem={{ content: <Icon name='angle double right' />, icon: true }}
-            prevItem={{ content: <Icon name='angle left' />, icon: true }}
-            nextItem={{ content: <Icon name='angle right' />, icon: true }}
+            firstItem={{ content: <Icon name='angle double left' />, icon: true, className: 'pagination-first-item' }}
+            lastItem={{ content: <Icon name='angle double right' />, icon: true, className: 'pagination-last-item' }}
+            prevItem={{ content: <Icon name='angle left' />, icon: true, className: 'pagination-prev-item' }}
+            nextItem={{ content: <Icon name='angle right' />, icon: true, className: 'pagination-next-item' }}
             totalPages={ this.totalPages() }
           />
         </div>

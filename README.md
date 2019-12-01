@@ -10,6 +10,7 @@ Demo: https://cryptic-fortress-34045.herokuapp.com/
 * ruby 2.4.1p111
 * Rails 5.2.3
 * Yarn 1.19.1
+* [geckodriver](https://github.com/mozilla/geckodriver/releases) for feature tests
 
 ## Installation
 ```bash

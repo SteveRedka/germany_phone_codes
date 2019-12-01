@@ -32,7 +32,5 @@ RSpec.describe PhoneCodes::PrefixesQuery, type: :query do
         expect(subject.list_possible_prefixes(code)).to include('69', '6'), error_msg
       end
     end
-
-    it 'handles whitespaces'
   end
 end
