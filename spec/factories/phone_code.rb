@@ -3,7 +3,7 @@ FactoryBot.define do
     min_len { 3 }
     max_len { 3 }
     prefix { rand(99999) }
-    comment { 'foobar' }
-    usage { 'for testing' }
+    comment { FFaker::AddressDE.unique.city }
+    usage { FFaker::Lorem.phrase }
   end
 end

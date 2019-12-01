@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe PhoneCodes::SearchQuery, type: :query do
   let! :phone_code1 { create(:phone_code, prefix: 69, usage: 'Mostly used by fish people') }
   let! :dashed_code { create(:phone_code, prefix: 812, min_len: 6, max_len: 11, usage: 'Saint-Petersburg') }
+  let! :another_code { create(:phone_code, prefix: 555, min_len: 6, max_len: 11, usage: '') }
 
   subject { PhoneCodes::SearchQuery }
 
@@ -30,7 +31,10 @@ RSpec.describe PhoneCodes::SearchQuery, type: :query do
 
   describe 'prefix and text' do
     it 'does OR search if you enter prefix and text' do
-      # subject.call()
+      result = subject.call('t-peter 69')
+      expect(result.length).to eq(2)
+      expect(result).to include(phone_code1)
+      expect(result).to include(dashed_code)
     end
   end
 end
