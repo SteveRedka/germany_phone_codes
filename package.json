@@ -11,7 +11,7 @@
     "react-dom": "^16.11.0",
     "react_ujs": "^2.6.0",
     "semantic-ui-react": "^0.88.1",
-    "yarn": "^1.19.1"
+    "yarn": "^1.22.0"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.9.0"
